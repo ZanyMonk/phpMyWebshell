@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-sm-5">
+    <div class="row">
+      <div class="row">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="shortTags"
+                 [(ngModel)]="webshell.shortTags"
+                 (ngModelChange)="webshell.shortEchoTags = false"
+          >
+          <label class="form-check-label" for="shortTags">Use short tags</label>
+        </div>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="shortEchoTags"
+                 [(ngModel)]="webshell.shortEchoTags"
+                 (ngModelChange)="webshell.shortTags = webshell.shortEchoTags || webshell.shortTags"
+          >
+          <label class="form-check-label" for="shortEchoTags">Use short echo tags</label>
+        </div>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="ignoreErrors"
+                 [(ngModel)]="webshell.ignoreErrors"
+          >
+          <label class="form-check-label" for="ignoreErrors">Ignore errors (@)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <label for="paramName" class="col-sm-6 col-form-label">Parameter name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="paramName" [(ngModel)]="webshell.paramName">
+      </div>
+
+      <label for="paramName" class="col-sm-6 col-form-label">Function</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="payloadFunc" [(ngModel)]="webshell.vectorFunction">
+      </div>
+
+      <label for="vectorName" class="col-sm-6 col-form-label">Vector name</label>
+      <div class="col-sm-6">
+        <select class="form-select" id="vectorName" [(ngModel)]="webshell.vector">
+          <option *ngFor="let vector of availableVectors" value="{{ vector }}">{{ '$' + vector }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+      <pre><code [highlight]="getWebshell()"></code></pre>
+  </div>
+</div>
